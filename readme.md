@@ -1,0 +1,1 @@
+A very little CLI tool to check the weather forecast.

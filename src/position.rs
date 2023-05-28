@@ -20,14 +20,10 @@ where
     s.parse::<f64>().map_err(de::Error::custom)
 }
 
-pub struct CircePosition;
+const API: &str = "https://geocode.maps.co/search";
 
-impl CircePosition {
-    const API: &str = "https://geocode.maps.co/search";
-
-    pub async fn get_locations(query: &str) -> Result<Vec<Location>, reqwest::Error> {
-        let url = format!("{}?q={}", Self::API, query);
-        let response = reqwest::get(url).await?.json::<Vec<Location>>().await?;
-        Ok(response)
-    }
+pub async fn get_locations(query: &str) -> Result<Vec<Location>, reqwest::Error> {
+    let url = format!("{}?q={}", API, query);
+    let response = reqwest::get(url).await?.json::<Vec<Location>>().await?;
+    Ok(response)
 }

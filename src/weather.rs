@@ -51,22 +51,16 @@ where
         })
         .collect()
 }
-pub struct CirceWeather;
 
-impl CirceWeather {
-    const API: &str = "https://api.open-meteo.com/v1";
+const API: &str = "https://api.open-meteo.com/v1";
 
-    pub async fn get_current_weather(
-        lat: f32,
-        lon: f32,
-    ) -> Result<WeatherResponse, reqwest::Error> {
-        let url = format!(
-            "{}/forecast?timezone=auto&latitude={}&longitude={}&current_weather=true&hourly=temperature_2m,relativehumidity_2m,precipitation,precipitation_probability,apparent_temperature",
-            Self::API,
-            lat,
-            lon
-        );
-        let response = reqwest::get(url).await?.json::<WeatherResponse>().await?;
-        Ok(response)
-    }
+pub async fn get_current_weather(lat: f32, lon: f32) -> Result<WeatherResponse, reqwest::Error> {
+    let url = format!(
+        "{}/forecast?timezone=auto&latitude={}&longitude={}&current_weather=true&hourly=temperature_2m,relativehumidity_2m,precipitation,precipitation_probability,apparent_temperature",
+        API,
+        lat,
+        lon
+    );
+    let response = reqwest::get(url).await?.json::<WeatherResponse>().await?;
+    Ok(response)
 }

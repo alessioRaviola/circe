@@ -5,10 +5,10 @@ use term_table::{
     Table, TableStyle,
 };
 
-use crate::{weather::WeatherData, CircePosition, CirceWeather};
+use crate::{get_current_weather, get_locations, weather::WeatherData};
 
 pub async fn current_weather(location: &str, max: usize) {
-    let locs = match CircePosition::get_locations(location).await {
+    let locs = match get_locations(location).await {
         Ok(val) => val,
         Err(e) => {
             println!("No locations were found with the given name. ({})", e);
@@ -17,7 +17,7 @@ pub async fn current_weather(location: &str, max: usize) {
     };
     let loc = locs.first().unwrap();
 
-    let weather = CirceWeather::get_current_weather(loc.lat as f32, loc.lon as f32)
+    let weather = get_current_weather(loc.lat as f32, loc.lon as f32)
         .await
         .unwrap();
 

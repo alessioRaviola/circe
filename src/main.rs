@@ -1,10 +1,10 @@
-use circe::Circe;
+use circe::current_weather;
 
 use clap::Parser;
 
 #[derive(Debug, Parser)]
 struct Args {
-    #[arg(short)]
+    #[clap(required = true)]
     location: String,
     #[arg(short, default_value_t = 12)]
     max_data: usize,
@@ -14,7 +14,7 @@ struct Args {
 async fn main() -> Result<(), ()> {
     let args = Args::parse();
 
-    Circe::current_weather(&args.location, args.max_data).await;
+    current_weather(&args.location, args.max_data).await;
 
     Ok(())
 }

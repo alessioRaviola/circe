@@ -92,26 +92,18 @@ fn print_weather(location: String, weather_data: WeatherData, max: usize) {
             ),
             TableCell::new_with_alignment(
                 style_if_greater(
-                    weather_data.precipitation_probability[i + 1],
+                    weather_data.precipitation_probability[i],
                     0.0,
                     cyan_style,
                     normal_style,
                 )
-                .paint(format!(
-                    "{:.1}%",
-                    weather_data.precipitation_probability[i + 1]
-                )),
+                .paint(format!("{:.1}%", weather_data.precipitation_probability[i])),
                 1,
                 Alignment::Right,
             ),
             TableCell::new_with_alignment(
-                style_if_greater(
-                    weather_data.precipitation[i + 1],
-                    0.0,
-                    cyan_style,
-                    normal_style,
-                )
-                .paint(format!("{:.1}mm", weather_data.precipitation[i + 1])),
+                style_if_greater(weather_data.precipitation[i], 0.0, cyan_style, normal_style)
+                    .paint(format!("{:.1}mm", weather_data.precipitation[i])),
                 1,
                 Alignment::Right,
             ),

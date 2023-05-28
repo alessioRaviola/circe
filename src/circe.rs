@@ -121,7 +121,7 @@ fn print_weather(location: String, weather_data: WeatherData, max: usize) {
                 Alignment::Right,
             ),
             TableCell::new_with_alignment(
-                normal_style.paint(format!("{:.1}%", weather_data.windspeed_10m[i])),
+                normal_style.paint(format!("{:.1}km/h", weather_data.windspeed_10m[i])),
                 1,
                 Alignment::Right,
             ),

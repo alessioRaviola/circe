@@ -4,8 +4,10 @@ use clap::Parser;
 
 #[derive(Debug, Parser)]
 struct Args {
+    /// Name of the location to check the weather for
     #[clap(required = true)]
     location: String,
+    /// Maximum number of data points to show the forecast for
     #[arg(short, default_value_t = 12)]
     max_data: usize,
 }

@@ -10,16 +10,26 @@ use crate::{get_current_weather, get_locations, weather::WeatherData};
 pub async fn current_weather(location: &str, max: usize, short: bool) {
     let locs = match get_locations(location).await {
         Ok(val) => val,
-        Err(e) => {
-            println!("No locations were found with the given name. ({})", e);
+        Err(_) => {
+            println!("Request error.");
             return;
         }
     };
-    let loc = locs.first().unwrap();
+    let loc = match locs.first() {
+        Some(val) => val,
+        None => {
+            println!("No locations were found with the given name.");
+            return;
+        }
+    };
 
-    let weather = get_current_weather(loc.lat as f32, loc.lon as f32)
-        .await
-        .unwrap();
+    let weather = match get_current_weather(loc.lat as f32, loc.lon as f32).await {
+        Ok(val) => val,
+        Err(e) => {
+            println!("Could not find weather data. ({})", e);
+            return;
+        }
+    };
 
     if short {
         print_weather_short(loc.display_name.clone(), weather.hourly, max)

@@ -1,7 +1,7 @@
-use std::{fmt::Display, str::FromStr, string::ParseError};
+use std::{fmt::Display};
 
 use chrono::{DateTime, Local, TimeZone};
-use serde::{de::Error, Deserialize, Deserializer};
+use serde::{Deserialize, Deserializer};
 
 #[derive(Deserialize)]
 pub struct WeatherResponse {

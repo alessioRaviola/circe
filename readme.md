@@ -1,5 +1,14 @@
 A little CLI tool to check the weather forecast.
 
+## Install
+Using https://github.com/rossmacarthur/install:
+```
+curl --proto '=https' --tlsv1.2 -sSf https://rossmacarthur.github.io/install/crate.sh \
+    | bash -s -- --repo "alessioRaviola/circe" --to ~/.cargo/bin
+```
+
+## Use
+
 Usage: `circe [OPTIONS] <LOCATION>`
 
 Arguments:
